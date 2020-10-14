@@ -1,0 +1,42 @@
+#缓存配置
+spring:
+  ehcache: #ehcache配置
+    config: config/cache/ehcache.xml #ehcache配置文件路径
+
+  redis: #Redis配置
+    #以下为redisCache自定义配置
+    selfdefine: #RedisCache自定义设置,定义cache块等信息
+      map:
+        defaultRedis: #cache的CacheName,可自行修改,往缓存存取时需指定此名称,以下为针对此名称的RedisCache的配置
+          expireTime: 60 #该cache内每个key value的过期时间单位:秒
+          cacheNullValues: true #是否允许缓存空值,默认允许缓存空值,否则传入空值会报错
+          keyPrefix: leaf6 #自定义前缀内容
+          usePrefix: true #是否使用自定义前缀
+        authRedis: #用户认证专用缓存
+          expireTime: 1800 #用户认证信息缓存时间30分钟单位:1800秒
+          cacheNullValues: false #不缓存空值
+          keyPrefix: jwt #jwt前缀
+          usePrefix: true #使用自定义前缀
+        defaultRedis2: #自定义缓存名称
+          expireTime: 60 #缓存默认过期时间单位:秒
+          cacheNullValues: true #默认缓存空值,否则传入空值会报错
+          keyPrefix: ddddd #自定义前缀内容
+          usePrefix: false #是否使用自定义前缀
+#以下为Redis连接相关设置
+    password: 
+    ssl: false
+    database: 0
+    host: 10.1.96.81
+    port: 6379 
+    timeout: 10
+    cluster:
+      nodes: #节点配置数量小于等于1时,将默认连接上述host和port配置的redis
+        - 10.1.96.81:6379
+      maxRedirects: 3  # 获取失败 最大重定向次数
+    lettuce: 
+      pool:
+        maxIdle: 10    # 连接池中的最大空闲连接
+        minIdle:  5     # 连接池中的最小空闲连接
+        maxActive: 1000  # 连接池最大连接数（使用负值表示没有限制）
+        maxWait: -1   # 连接池最大阻塞等待时间（使用负值表示没有限制）
+      shutdownTimeout: 6000  # 连接超时时长秒
