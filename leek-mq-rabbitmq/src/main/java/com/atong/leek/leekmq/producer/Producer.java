@@ -7,12 +7,25 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * @description 生产者
+ * @author atong
+ * @date 14:09 2020/10/30
+ * @version 1.0.0.1
+ **/
 @RestController
 @RequestMapping("/send")
 public class Producer {
     @Autowired
     public RabbitTemplate rabbitTemplate;
 
+    /**
+     * @description The simplest thing that does something
+     * @return String
+     * @author atong
+     * @date
+     * @version 1.0.0.1
+     */
     @GetMapping("/email")
     public String sendEmail() {
         String message = "send email";

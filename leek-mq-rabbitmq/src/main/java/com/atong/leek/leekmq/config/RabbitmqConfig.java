@@ -5,6 +5,12 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * @description  rabbitmq配置类
+ * @author atong
+ * @date 14:07 2020/10/30
+ * @version 1.0.0.1
+ **/
 @Configuration
 public class RabbitmqConfig {
     public static final String QUEUE_INFORM_EMAIL = "queue_inform_email";
