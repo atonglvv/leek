@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 /**
  * @description  rabbitmq配置类
  * @author atong
- * @date 14:07 2020/10/30
+ * @date 14:53 2020/10/30
  * @version 1.0.0.1
  **/
 @Configuration

@@ -7,12 +7,14 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="leek-demo" />
+        <module name="leek-aop" />
         <module name="leek-mq-rabbitmq" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="leek-aop" options="" />
       <module name="leek-demo" options="-parameters" />
       <module name="leek-mq-rabbitmq" options="-parameters" />
     </option>
