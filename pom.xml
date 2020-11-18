@@ -11,6 +11,7 @@
         <module>leek-core-cache</module>
         <module>leek-mq-rabbitmq</module>
         <module>leek-aop</module>
+        <module>leek-core</module>
     </modules>
 
     <packaging>pom</packaging>
@@ -70,6 +71,7 @@
         <bouncycastle.version>1.60</bouncycastle.version>
         <groovy.version>2.2.2</groovy.version>
         <springboot.aop.version>2.3.5.RELEASE</springboot.aop.version>
+        <springboot.log4j2.version>2.3.5.RELEASE</springboot.log4j2.version>
     </properties>
 
     <dependencyManagement>
@@ -459,6 +461,12 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-aop</artifactId>
                 <version>${springboot.aop.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-log4j2</artifactId>
+                <version>${springboot.log4j2.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

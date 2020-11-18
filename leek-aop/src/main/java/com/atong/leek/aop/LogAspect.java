@@ -22,7 +22,7 @@ public class LogAspect {
     public void logPointCut(){}
 
     @Around("logPointCut()")
-    public Object Around(ProceedingJoinPoint joinPoint)throws Throwable{
+    public Object around(ProceedingJoinPoint joinPoint)throws Throwable{
         String className = "";
         String methodName = "";
         try {
