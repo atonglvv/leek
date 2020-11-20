@@ -1,5 +1,6 @@
 package com.atong.leek.leekmq.consumer;
 
+import org.apache.commons.lang.StringEscapeUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.annotation.Queue;
@@ -15,7 +16,8 @@ public class Consumer2 {
 
     @RabbitHandler
     public void receive(String msg) {
-        logger.info("consumer2 receive message is : {}", msg);
+        String messagemsg = StringEscapeUtils.escapeJava(msg);
+        logger.info("consumer2 receive message is : {}", messagemsg);
     }
 
 }
