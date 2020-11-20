@@ -35,11 +35,11 @@ public class Producer {
 
     /**
      * 对应Consume2
-     * @return
+     * @return String
      */
     @GetMapping("/hello")
     public String sendHello() {
-        String message = "send hello";
+        String message = "send hel\"lo";
         for (int i = 0; i < 10; i++) {
             rabbitTemplate.convertAndSend("hello", message);
         }
@@ -47,9 +47,9 @@ public class Producer {
     }
 
     /**
-     * 对应Consume2
+     * 对应Consume3
      * Work模式
-     * @return
+     * @return String
      */
     @GetMapping("/work")
     public String sendWork() {
