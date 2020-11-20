@@ -6,6 +6,7 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 /**
  * @program: leek
@@ -13,12 +14,13 @@ import org.slf4j.LoggerFactory;
  * @author: atong
  * @create: 2020-11-06 10:57
  */
+@Component
 @Aspect
 public class LogAspect {
 
     private static final Logger logger = LoggerFactory.getLogger(LogAspect.class);
 
-    @Pointcut("execution(public * com.atong.leek.*.*(..))")
+    @Pointcut("execution(public * com.atong.leek.demo.controller.*.*(..))")
     public void logPointCut(){}
 
     @Around("logPointCut()")
