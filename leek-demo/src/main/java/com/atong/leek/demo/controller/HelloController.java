@@ -12,7 +12,7 @@ public class HelloController {
 
     @GetMapping("/hello")
     public String hello() {
-        logger.info("localhost:8080/hello is running...");
+        logger.error("localhost:8080/hello is running...");
         return "Hello World...";
     }
 }

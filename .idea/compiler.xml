@@ -7,8 +7,9 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="leek-demo" />
-        <module name="leek-aop" />
         <module name="leek-mq-rabbitmq" />
+        <module name="leek-aop" />
+        <module name="leek-core" />
       </profile>
     </annotationProcessing>
   </component>
