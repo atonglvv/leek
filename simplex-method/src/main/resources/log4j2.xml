@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!--
+    status : 这个用于设置log4j2自身内部的信息输出,可以不设置,当设置成trace时,会看到log4j2内部各种详细输出
+    monitorInterval : Log4j能够自动检测修改配置文件和重新配置本身, 设置间隔秒数。
+-->
+<Configuration status="WARN" monitorInterval="600">
+
+	<Properties>
+		<property name="PATTERN">%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level {%l} - |%msg|%n</property>
+		<property name="PATH_HOME">/var/leek/leek-demo/logs</property>
+		<property name="MAX_NUM">1</property>
+		<property name="MAX_SIZE">100 MB</property>
+	</Properties>
+
+	<Appenders>
+
+		<!--这个输出控制台的配置，这里输出info级别以上的信息到System.out-->
+		<Console name="console_out_appender" target="SYSTEM_OUT">
+			<!--onMatch当前级别及以上如何处理 1.ACCEPT接收 2.DENY拒绝 3.NEUTRAL往后走,其他的直接拒绝deny（onMismatch）-->
+			<ThresholdFilter level="INFO" onMatch="ACCEPT" onMismatch="DENY"/>
+			<!-- 输出日志的格式 -->
+			<PatternLayout pattern="${PATTERN}"/>
+		</Console>
+
+
+		<!-- 输出到文件 每次大小超过size，则这size大小的日志会自动存入按年份-月份建立的文件夹下面并进行压缩，作为存档-->
+		<RollingFile name="rolling_file_appender" fileName="${PATH_HOME}/dubbo.log" filePattern="${PATH_HOME}/$${date:}%d{yyyy-MM-dd}-%i-dubbo-.log">
+			<!--记录info及以上级别的信息，其他的直接拒绝-->
+			<ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY"/>
+			<PatternLayout pattern="${PATTERN}"/>
+			<Policies>
+				<TimeBasedTriggeringPolicy/>
+				<SizeBasedTriggeringPolicy size="${MAX_SIZE}"/>
+			</Policies>
+			<!-- 设置同类型日志,同一文件夹下可以存放的数量,如果不设置此属性则默认存放7个文件 -->
+			<DefaultRolloverStrategy max="${MAX_NUM}" />
+		</RollingFile>
+
+		<!-- 这个会打印出所有的info及以下级别的信息，每次大小超过size，则这size大小的日志会自动存入按年份-月份建立的文件夹下面并进行压缩，作为存档-->
+		<RollingFile name="sql_file_appender" fileName="${PATH_HOME}/dubbo.log" filePattern="${PATH_HOME}/$${date:}%d{yyyy-MM-dd}-%i-dubbo.log">
+			<!--打印sql日志-->
+			<ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY"/>
+			<PatternLayout pattern="${PATTERN}"/>
+			<Policies>
+				<!--interval属性用来指定多久滚动一次，默认是1 hour-->
+				<TimeBasedTriggeringPolicy/>
+				<SizeBasedTriggeringPolicy size="${MAX_SIZE}"/>
+			</Policies>
+			<!-- 设置同类型日志,同一文件夹下可以存放的数量,如果不设置此属性则默认存放7个文件 -->
+			<DefaultRolloverStrategy max="${MAX_NUM}" />
+		</RollingFile>
+
+
+	</Appenders>
+
+	<Loggers>
+
+		<!--dubbo日志输出级别为info-->
+		<logger name="com.atong.leek.demo.controller" level="info" additivity="false">
+			<appender-ref ref="console_out_appender"/>
+		</logger>
+
+
+		<!-- 配置日志的根节点 -->
+		<root level="info">
+			<appender-ref ref="console_out_appender"/>
+			<appender-ref ref="rolling_file_appender"/>
+			<appender-ref ref="sql_file_appender"/>
+		</root>
+	</Loggers>
+
+</Configuration>
