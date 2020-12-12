@@ -11,7 +11,7 @@
     <groupId>com.atong.leek</groupId>
     <artifactId>leek-druid</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>druid</name>
+    <name>leek-druid</name>
     <description>Druid project for Leek</description>
 
     <properties>
