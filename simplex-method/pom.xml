@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.leek.atong</groupId>
-    <artifactId>demo</artifactId>
+    <artifactId>simplex-method</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>simplex-method</name>
     <description>simplex-method project for Spring Boot</description>
