@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+	<properties resource="mybatis/db.properties" />
+	
+ 	<settings>
+	
+		<!-- 设置自动驼峰转换		 -->
+		<setting name="mapUnderscoreToCamelCase" value="true" />
+
+		<!-- 开启懒加载 -->		
+		 <!-- 当启用时，有延迟加载属性的对象在被调用时将会完全加载任意属性。否则，每种属性将会按需要加载。默认：true -->
+	    <setting name="aggressiveLazyLoading" value="false" />
+		<setting name="logImpl" value="STDOUT_LOGGING"/>
+
+	</settings>
+
+	<!-- 别名定义 -->
+
+	<!--<typeAliases>-->
+		<!--<package name="com.enjoy.mybatis.entity" />-->
+	<!--</typeAliases>-->
+
+
+	<!--配置environment环境 -->
+	<environments default="development">
+		<!-- 环境配置1，每个SqlSessionFactory对应一个环境 -->
+		<environment id="development">
+			<transactionManager type="JDBC" />
+			<dataSource type="UNPOOLED">
+				<property name="driver" value="${jdbc_driver}" />
+				<property name="url" value="${jdbc_url}" />
+				<property name="username" value="${jdbc_username}" />
+				<property name="password" value="${jdbc_password}" />
+			</dataSource>
+		</environment>
+
+
+	</environments>
+
+	<!-- 映射文件，mapper的配置文件 -->
+	<mappers>
+		<!--直接映射到相应的mapper文件 -->
+		<mapper resource="mapper/ResellerSettlementInfoMapper.xml" />
+<!--		<mapper resource="mapper/TUserMapper.xml" />-->
+<!--		<mapper resource="mapper/TRoleMapper.xml" />-->
+<!--		<mapper resource="mapper/TApiInfoMapper.xml" />-->
+		<!--
+		xml与接口需要在同一路径下
+		<package name="com.enjoy.mybatis.dao" />
+        -->
+	</mappers>
+
+
+
+
+</configuration>  

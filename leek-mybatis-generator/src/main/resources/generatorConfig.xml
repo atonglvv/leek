@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+		PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+		"http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+	<!--引入外部文件-->
+	<properties resource="conf.properties"/>
+	<!-- 数据库驱动: 若之前未在build里配置数据库驱动包，可选择本地硬盘上面的数据库驱动包-->
+	<!--[注：maven引入mysql-connector-java相关依赖后可不用下面的驱动配置参数]-->
+	<classPathEntry location="D:\MavenRepository\mysql\mysql-connector-java\8.0.22\mysql-connector-java-8.0.22.jar"/>
+
+
+	<context id="mysqlTables" targetRuntime="MyBatis3">
+		<plugin type="org.mybatis.generator.plugins.SerializablePlugin"></plugin>
+
+		<commentGenerator type="${duc.comment.code.address}">
+			<property name="suppressDate" value="true"/>
+			<!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+			<property name="suppressAllComments" value="true"/>
+		</commentGenerator>
+
+		<!--数据库链接地址账号密码-->
+		<jdbcConnection driverClass="com.mysql.cj.jdbc.Driver" connectionURL="${duc.db.address}"
+						userId="${duc.db.username}" password="${duc.db.password}"/>
+
+		<!-- 默认false，把JDBC DECIMAL 和 NUMERIC 类型解析为 Integer，为 true时把JDBC DECIMAL
+            和 NUMERIC 类型解析为java.math.BigDecimal -->
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false"/>
+		</javaTypeResolver>
+
+		<!--生成Model类存放位置-->
+		<javaModelGenerator targetPackage="${duc.model.address}" targetProject="${duc.source.address}">
+			<!-- enableSubPackages:是否让schema作为包的后缀 -->
+			<property name="enableSubPackages" value="true"/>
+			<!-- 从数据库返回的值被清理前后的空格 -->
+			<property name="trimStrings" value="true"/>
+		</javaModelGenerator>
+
+		<!--生成映射文件存放位置-->
+		<sqlMapGenerator targetPackage="${duc.mapper.address}" targetProject="${duc.source.address}">
+			<!-- enableSubPackages:是否让schema作为包的后缀 -->
+			<property name="enableSubPackages" value="true"/>
+		</sqlMapGenerator>
+
+		<!--生成Mapper类存放位置-->
+		<javaClientGenerator type="XMLMAPPER" targetPackage="${duc.dto.address}" targetProject="${duc.source.address}">
+			<!-- enableSubPackages:是否让schema作为包的后缀 -->
+			<property name="enableSubPackages" value="true"/>
+		</javaClientGenerator>
+
+		<!--生成对应表及类名-->
+		<table tableName="image_temp" domainObjectName="imageTemp"
+			   enableCountByExample="false"
+			   enableUpdateByExample="false"
+			   enableDeleteByExample="false"
+			   enableSelectByExample="false"
+			   selectByExampleQueryId="false">
+			<!--useActualColumnNames用于指定生成实体类时是否使用实际的列名作为实体类的属性名。取值true或false:-->
+			<property name="useActualColumnNames" value="false"/>
+		</table>
+	</context>
+</generatorConfiguration>
