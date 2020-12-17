@@ -13,6 +13,7 @@
 	<context id="mysqlTables" targetRuntime="MyBatis3">
 		<plugin type="org.mybatis.generator.plugins.SerializablePlugin"></plugin>
 
+		<!--用于entity字段注释-->
 		<commentGenerator type="${duc.comment.code.address}">
 			<property name="suppressDate" value="true"/>
 			<!-- 是否去除自动生成的注释 true：是 ： false:否 -->

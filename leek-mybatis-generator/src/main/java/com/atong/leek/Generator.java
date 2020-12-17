@@ -31,6 +31,10 @@ public class Generator {
                 callback, warnings);
         myBatisGenerator.generate(null);
 
+        System.err.println("------------------------------info-----------------------------");
+        System.err.println("创建成功!! 欢迎下次使用!");
+        System.err.println("------------------------------------------------------------------");
+
     }
 
     public static void main(String[] args) throws Exception {
