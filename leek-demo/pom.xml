@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.atong.leek</groupId>
-    <artifactId>demo</artifactId>
+    <artifactId>leek-demo</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>demo</name>
+    <name>leek-demo</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>

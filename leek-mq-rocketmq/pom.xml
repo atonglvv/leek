@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.atong.leek</groupId>
-    <artifactId>rocketmq</artifactId>
+    <artifactId>leek-mq-rocketmq</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>leek-mq-rocketmq</name>
     <description>leek-rocketmq</description>

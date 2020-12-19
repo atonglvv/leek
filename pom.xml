@@ -12,6 +12,7 @@
         <module>leek-mq-rabbitmq</module>
         <module>leek-aop</module>
         <module>leek-core</module>
+        <module>leek-mybatis-generator</module>
     </modules>
 
     <packaging>pom</packaging>
