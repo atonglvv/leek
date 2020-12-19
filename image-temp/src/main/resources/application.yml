@@ -1,0 +1,111 @@
+server:
+  port: 8089
+
+
+spring:
+  application:
+    name: item
+
+  datasource:
+    #使用druid连接池
+    type: com.alibaba.druid.pool.DruidDataSource
+
+#  datasource:
+#    url: jdbc:mysql://127.0.0.1:3306/draft?useSSL=false&useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Hongkong
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    username: root
+#    password: 1230
+#    platform: mysql
+#    type: com.alibaba.druid.pool.DruidDataSource
+#    druid:
+#      initial-size: 5
+#      min-idle: 5
+#      max-active: 100
+#      max-wait: 60000
+#      time-between-eviction-runs-millis: 60000
+#      min-evictable-idle-time-millis: 300000
+#      validationQuery: select 'x'
+#      test-while-idle: true
+#      test-on-borrow: false
+#      test-on-return: false
+#      filters: config,wall,stat
+#      poolPreparedStatements: true
+#      maxPoolPreparedStatementPerConnectionSize: 20
+#      maxOpenPreparedStatements: 20
+#      connectionProperties: druid.stat.slowSqlMillis=200;druid.stat.logSlowSql=true;config.decrypt=false
+#      use-global-data-source-stat: true
+#      web-stat-filter:
+#        enabled: true
+#        url-pattern: /*
+#        exclusions: /druid/*,*.js,*.gif,*.jpg,*.bmp,*.png,*.css,*.ico
+#        session-stat-enable: true
+#        session-stat-max-count: 10
+#      stat-view-servlet:
+#        enabled: true
+#        url-pattern: /druid/*
+#        reset-enable: true
+#        login-username: admin
+#        login-password: admin
+
+
+# 自定义的主数据源配置信息
+primary:
+  datasource:
+    #druid相关配置
+    druid:
+      #监控统计拦截的filters
+      filters: config,wall,stat
+      driverClassName: com.mysql.cj.jdbc.Driver
+      #配置基本属性
+      url: jdbc:mysql://127.0.0.1:3306/draft?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&autoReconnect=true&useSSL=false&serverTimezone=UTC
+      username: root
+      password: 1230
+      #配置初始化大小/最小/最大
+      initialSize: 5
+      minIdle: 5
+      maxActive: 100
+      #获取连接等待超时时间
+      maxWait: 60000
+      #间隔多久进行一次检测，检测需要关闭的空闲连接
+      timeBetweenEvictionRunsMillis: 60000
+      #一个连接在池中最小生存的时间
+      minEvictableIdleTimeMillis: 300000
+      validationQuery: SELECT 'x'
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      #打开PSCache，并指定每个连接上PSCache的大小。oracle设为true，mysql设为false。分库分表较多推荐设置为false
+      poolPreparedStatements: false
+      maxPoolPreparedStatementPerConnectionSize: 20
+      maxOpenPreparedStatements: 20
+
+# 自定义的从数据源配置信息
+back:
+  datasource:
+    #druid相关配置
+    druid:
+      #监控统计拦截的filters
+      filters: config,wall,stat
+      driverClassName: com.mysql.cj.jdbc.Driver
+      #配置基本属性
+      url: jdbc:mysql://127.0.0.1:3306/auto?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&autoReconnect=true&useSSL=false
+      username: root
+      password: 1230
+      #配置初始化大小/最小/最大
+      initialSize: 5
+      minIdle: 5
+      maxActive: 100
+      #获取连接等待超时时间
+      maxWait: 60000
+      #间隔多久进行一次检测，检测需要关闭的空闲连接
+      timeBetweenEvictionRunsMillis: 60000
+      #一个连接在池中最小生存的时间
+      minEvictableIdleTimeMillis: 300000
+      validationQuery: SELECT 'x'
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      #打开PSCache，并指定每个连接上PSCache的大小。oracle设为true，mysql设为false。分库分表较多推荐设置为false
+      poolPreparedStatements: false
+      maxPoolPreparedStatementPerConnectionSize: 20
+      maxOpenPreparedStatements: 20

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.atong.leek.imagetemp.mapper.primary.ImageTempMapper">
+  <resultMap id="BaseResultMap" type="com.atong.leek.imagetemp.pojo.entity.ImageTemp">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="old_hash" jdbcType="VARCHAR" property="oldHash" />
+    <result column="old_url" jdbcType="VARCHAR" property="oldUrl" />
+    <result column="new_hash" jdbcType="VARCHAR" property="newHash" />
+    <result column="new_url" jdbcType="VARCHAR" property="newUrl" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, old_hash, old_url, new_hash, new_url
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from image_temp
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from image_temp
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.atong.leek.imagetemp.pojo.entity.ImageTemp">
+    insert into image_temp (id, old_hash, old_url, 
+      new_hash, new_url)
+    values (#{id,jdbcType=INTEGER}, #{oldHash,jdbcType=VARCHAR}, #{oldUrl,jdbcType=VARCHAR}, 
+      #{newHash,jdbcType=VARCHAR}, #{newUrl,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.atong.leek.imagetemp.pojo.entity.ImageTemp">
+    insert into image_temp
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="oldHash != null">
+        old_hash,
+      </if>
+      <if test="oldUrl != null">
+        old_url,
+      </if>
+      <if test="newHash != null">
+        new_hash,
+      </if>
+      <if test="newUrl != null">
+        new_url,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="oldHash != null">
+        #{oldHash,jdbcType=VARCHAR},
+      </if>
+      <if test="oldUrl != null">
+        #{oldUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="newHash != null">
+        #{newHash,jdbcType=VARCHAR},
+      </if>
+      <if test="newUrl != null">
+        #{newUrl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.atong.leek.imagetemp.pojo.entity.ImageTemp">
+    update image_temp
+    <set>
+      <if test="oldHash != null">
+        old_hash = #{oldHash,jdbcType=VARCHAR},
+      </if>
+      <if test="oldUrl != null">
+        old_url = #{oldUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="newHash != null">
+        new_hash = #{newHash,jdbcType=VARCHAR},
+      </if>
+      <if test="newUrl != null">
+        new_url = #{newUrl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.atong.leek.imagetemp.pojo.entity.ImageTemp">
+    update image_temp
+    set old_hash = #{oldHash,jdbcType=VARCHAR},
+      old_url = #{oldUrl,jdbcType=VARCHAR},
+      new_hash = #{newHash,jdbcType=VARCHAR},
+      new_url = #{newUrl,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
