@@ -28,7 +28,7 @@ public class LockFive {
      * 扣减库存
      * @return end
      */
-    @RequestMapping("/deduct_stock_four")
+    @RequestMapping("/deduct_stock_five")
     public String deductStock () {
 
         String lockKey = "lockKey";
