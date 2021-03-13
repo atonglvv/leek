@@ -32,7 +32,7 @@ public class LockOne {
         if (stock > 0) {
             int realStock = stock - 1;
             // jedis.set(key, value)
-            stringRedisTemplate.opsForValue().set("stock", realStock +"");
+            stringRedisTemplate.opsForValue().set("stock", realStock + "");
             System.out. println("扣减成功,剩余库存:" + realStock);
         }else {
             System.out.println("扣减失败,库存不足");
