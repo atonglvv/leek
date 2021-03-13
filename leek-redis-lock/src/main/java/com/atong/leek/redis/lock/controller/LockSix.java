@@ -12,14 +12,14 @@ import java.util.concurrent.TimeUnit;
  * @program: leek
  * @description:
  * 一步一步实现redis分布式锁
- * 第三步业务逻辑实现,分布式锁version1.1  考虑异常 与 机器宕机 [兜底方案 加过期时间, 但非原子操作]
+ * 第三步业务逻辑实现,分布式锁version1.1  考虑异常 与 机器宕机 [兜底方案 加过期时间, 保证原子操作]
  * redis 命令 ： setnx
  * set if not exists
  * @author: atong
  * @create: 2021-03-11 22:53
  */
 @RestController
-public class LockFive {
+public class LockSix {
 
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
@@ -33,9 +33,7 @@ public class LockFive {
 
         String lockKey = "lockKey";
         //jedis.setnx(key, value)
-        Boolean result = stringRedisTemplate.opsForValue().setIfAbsent(lockKey, "lockValue");
-        //注意该行处, 若发生系统异常 或机器宕机。 则会产生问题。 set 与 expire 应是原子操作
-        stringRedisTemplate.expire(lockKey, 10, TimeUnit.SECONDS);
+        Boolean result = stringRedisTemplate.opsForValue().setIfAbsent(lockKey, "lockValue", 10, TimeUnit.SECONDS);
         if (!result) {
             return "error_code";
         }
