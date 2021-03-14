@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit;
  * @program: leek
  * @description:
  * 一步一步实现redis分布式锁
- * 第三步业务逻辑实现,分布式锁version1.1  考虑异常 与 机器宕机 [兜底方案 加过期时间, 但非原子操作]
+ * 第五步业务逻辑实现,分布式锁version1.1  考虑异常 与 机器宕机 [兜底方案 加过期时间, 但非原子操作]
  * redis 命令 ： setnx
  * set if not exists
  * @author: atong
