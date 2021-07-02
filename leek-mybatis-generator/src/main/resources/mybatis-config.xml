@@ -35,8 +35,6 @@
 				<property name="password" value="${jdbc_password}" />
 			</dataSource>
 		</environment>
-
-
 	</environments>
 
 	<!-- 映射文件，mapper的配置文件 -->
