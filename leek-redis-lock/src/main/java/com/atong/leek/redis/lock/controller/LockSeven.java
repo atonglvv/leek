@@ -16,6 +16,8 @@ import java.util.concurrent.TimeUnit;
  * 第七步业务逻辑实现,分布式锁version1.7  考虑异常 与 机器宕机 [兜底方案 加过期时间, 保证原子操作]
  * 考虑某一次请求耗时过久, 且redis锁过期释放, 此时会有其他请求进入。
  * 解决方案： 将redis锁的 value设置成唯一的请求id,  当解锁的时候, 先获取value判断是否是当前进程加的锁，再去删除。
+ * 但是该方案还是存在问题：unlock的时候 先get后delete不是原子操作,
+ * 如果 判断value是当前值, 还未删除锁时,此时锁过期,并且其他请求已获取锁成功, 这时候第一个请求会删除第二个请求获取到的锁
  * redis 命令 ： setnx
  * set if not exists
  * @author: atong
