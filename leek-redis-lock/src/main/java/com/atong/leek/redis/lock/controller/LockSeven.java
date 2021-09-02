@@ -6,20 +6,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Objects;
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 /**
  * @program: leek
  * @description:
  * 一步一步实现redis分布式锁
- * 第六步业务逻辑实现,分布式锁version1.1  考虑异常 与 机器宕机 [兜底方案 加过期时间, 保证原子操作]
+ * 第七步业务逻辑实现,分布式锁version1.7  考虑异常 与 机器宕机 [兜底方案 加过期时间, 保证原子操作]
+ * 考虑某一次请求耗时过久, 且redis锁过期释放, 此时会有其他请求进入。
+ * 解决方案： 将redis锁的 value设置成唯一的请求id,  当解锁的时候, 先获取value判断是否是当前进程加的锁，再去删除。
  * redis 命令 ： setnx
  * set if not exists
  * @author: atong
- * @create: 2021-03-11 22:53
+ * @create: 2021-09-02 16:25
  */
 @RestController
-public class LockSix {
+public class LockSeven {
 
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
@@ -32,8 +35,9 @@ public class LockSix {
     public String deductStock () {
 
         String lockKey = "lockKey";
+        String value = UUID.randomUUID().toString();
         //jedis.setnx(key, value)
-        Boolean result = stringRedisTemplate.opsForValue().setIfAbsent(lockKey, "lockValue", 10, TimeUnit.SECONDS);
+        Boolean result = stringRedisTemplate.opsForValue().setIfAbsent(lockKey, value, 10, TimeUnit.SECONDS);
         if (!result) {
             return "error_code";
         }
@@ -51,7 +55,10 @@ public class LockSix {
                 System.out.println("扣减失败,库存不足");
             }
         } finally {
-            stringRedisTemplate.delete(lockKey);
+            // unlock 当解锁的时候, 先获取value判断是否是当前进程加的锁，再去删除。
+            if(value.equals(stringRedisTemplate.opsForValue().get(lockKey))) {
+                stringRedisTemplate.delete(lockKey);
+            }
         }
 
         return "end";
