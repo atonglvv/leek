@@ -32,7 +32,7 @@ public class LockSix {
     public String deductStock () {
 
         String lockKey = "lockKey";
-        //jedis.setnx(key, value)
+        //jedis.setnx(key, value) set key v nx ex
         Boolean result = stringRedisTemplate.opsForValue().setIfAbsent(lockKey, "lockValue", 10, TimeUnit.SECONDS);
         if (!result) {
             return "error_code";

@@ -53,8 +53,6 @@ public class LockFour {
             stringRedisTemplate.delete(lockKey);
         }
 
-
-
         return "end";
     }
 }

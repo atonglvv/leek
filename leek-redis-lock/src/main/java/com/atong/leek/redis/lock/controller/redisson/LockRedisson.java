@@ -38,6 +38,7 @@ public class LockRedisson {
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
 
+    @Autowired
     private Redisson redisson;
 
     /**
