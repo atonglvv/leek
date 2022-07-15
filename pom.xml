@@ -13,6 +13,7 @@
         <module>leek-aop</module>
         <module>leek-core</module>
         <module>leek-mybatis-generator</module>
+        <module>leek-Jedis</module>
     </modules>
 
     <packaging>pom</packaging>
