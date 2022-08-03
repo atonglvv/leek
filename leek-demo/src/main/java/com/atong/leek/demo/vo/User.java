@@ -1,19 +1,26 @@
 package com.atong.leek.demo.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.Data;
+
+import java.time.LocalDateTime;
+import java.util.List;
+
 /**
  * @program: leek
  * @description:
  * @author: atong
  * @create: 2022-07-15 16:54
  */
+@Data
 public class User {
+
     private String name;
 
-    public String getName() {
-        return name;
-    }
+    private Integer age;
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
+    private LocalDateTime brithday;
+
+    private List<InnerUser> innerUsers;
 }

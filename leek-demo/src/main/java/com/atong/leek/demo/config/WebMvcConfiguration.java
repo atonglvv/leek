@@ -1,18 +1,18 @@
 package com.atong.leek.demo.config;
 
-import com.alibaba.fastjson.serializer.SerializerFeature;
-import com.alibaba.fastjson.support.config.FastJsonConfig;
-import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.databind.JsonSerializer;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializerProvider;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -42,12 +42,23 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
             }
             // 解决 Controller 返回json对象中文乱码问题
             if (converter instanceof MappingJackson2HttpMessageConverter) {
+                ObjectMapper objectMapper = ((MappingJackson2HttpMessageConverter) converter).getObjectMapper();
+                objectMapper.getSerializerProvider().setNullValueSerializer(new JsonSerializer<Object>() {
+                    @Override
+                    public void serialize(Object o, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
+                        jsonGenerator.writeString("");
+                    }
+                });
                 ((MappingJackson2HttpMessageConverter) converter).setDefaultCharset(StandardCharsets.UTF_8);
+                ((MappingJackson2HttpMessageConverter) converter).setObjectMapper(objectMapper);
             }
         }
     }
 
-    @Override
+    /**
+     * 注意, 该方法跟 @JsonFormat(pattern = "yyyy-MM-dd HH:mm") 冲突
+     */
+/*    @Override
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
         FastJsonHttpMessageConverter converter = new FastJsonHttpMessageConverter();
         FastJsonConfig config = new FastJsonConfig();
@@ -72,5 +83,5 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
         mediaTypeList.add(MediaType.APPLICATION_JSON);
         converter.setSupportedMediaTypes(mediaTypeList);
         converters.add(converter);
-    }
+    }*/
 }
