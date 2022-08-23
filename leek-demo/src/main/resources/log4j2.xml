@@ -7,7 +7,7 @@
 <Configuration status="WARN" monitorInterval="600">
 
 	<Properties>
-		<property name="PATTERN">%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level {%l} - |%msg|%n</property>
+		<property name="PATTERN">%d{yyyy-MM-dd HH:mm:ss.SSS} - [%t] - [%X{requestId}] - %-5level {%l} - |%msg|%n</property>
 		<property name="PATH_HOME">/var/leek/leek-demo/logs</property>
 		<property name="MAX_NUM">1</property>
 		<property name="MAX_SIZE">100 MB</property>

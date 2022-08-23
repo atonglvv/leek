@@ -12,7 +12,18 @@ public class HelloController {
 
     @GetMapping("/hello")
     public String hello() {
-        logger.error("localhost:8080/hello is running...");
+        logger.error("localhost:8090/hello is running...");
         return "Hello World...";
+    }
+
+    @GetMapping("/throwName")
+    public String throwName() {
+        String throwName = null;
+        try {
+            int a = 1/0;
+        } catch (Exception e) {
+            throwName = e.getClass().getName();
+        }
+        return throwName;
     }
 }
